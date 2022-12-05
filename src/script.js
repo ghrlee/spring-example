@@ -1,10 +1,10 @@
 import p5 from "p5"
 
 let s = (sk) => {
-  let y = 250;
-  let velocity = 0;
+  let yPosition = 300;
   let restLength = 200;
-  let k = .033;
+  let springStrength = .033;
+  let velocity = 0;
   
   sk.setup = () =>{
     sk.createCanvas(600, 400);
@@ -13,20 +13,17 @@ let s = (sk) => {
   sk.draw = () =>{
     sk.background(112, 200, 126);
     sk.fill(45, 197, 244);
-    sk.circle(300, y, 64);
-    let x = y - restLength;
-    let force = - k * x;
-    console.log(y)
-    // f = m * a
-    velocity += force;
-    y += velocity;
+    sk.circle(300, yPosition, 64);
     
+    let displacementAmount = yPosition - restLength;
+    let force = - springStrength * displacementAmount;
+    velocity += force;
+    yPosition += velocity;
+
     velocity *= .92
   }
   
 
 }
 
-
 const P5 = new p5(s);
-
